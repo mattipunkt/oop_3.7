@@ -5,8 +5,14 @@ public class KeyGenerator {
     private int g;
 
     public KeyGenerator(int p, int q) {
-        this.p = p;
-        this.q = q;
+        if (checkPrime(p)) {
+            this.p = p;
+        } else if (checkPrime(q)) {
+            this.q = q;
+        } else {
+            System.out.println("Beide Zahlen müssen Primzahl sein!");
+        }
+
     }
 
     public void generatePrivateKey() {
@@ -40,6 +46,17 @@ public class KeyGenerator {
         while ((d*e) % f != 1) {
             d++;
         } return d;
+    }
+
+    public boolean checkPrime(int number) {
+        for (int i = 2; i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            } else {
+                i++;
+            }
+        }
+        return false;
     }
 }
 
