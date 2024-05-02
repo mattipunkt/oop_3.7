@@ -1,5 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        KeyGenerator k = new KeyGenerator(11, 17);
+        k.generatePrivateKey();
+
     }
 }

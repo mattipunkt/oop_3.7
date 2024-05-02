@@ -11,16 +11,35 @@ public class KeyGenerator {
 
     public void generatePrivateKey() {
         g = p * q;
-        int e = ggT(phi(g));
+        int phi = (p-1)*(q-1);
+        int e = findE(phi);
+        int d = findD(e, phi);
+        System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
+        System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
+
     }
 
-    public int phi(int q) {
-        return (p-1)*(q-1);
+    public int ggT(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return ggT(b, a % b);
+        }
     }
 
-    public int ggT(int phi) {
-        int e = 0;
 
-        return e;
+    public int findE(int f) {
+        int e = 2;
+        while (ggT(e, f) != 1) {
+            e++;
+        } return e;
+    }
+
+    public int findD(int e, int f) {
+        int d = 2;
+        while ((d*e) % f != 1) {
+            d++;
+        } return d;
     }
 }
+
