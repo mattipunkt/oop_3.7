@@ -5,13 +5,9 @@ public class KeyGenerator {
     private int g;
 
     public KeyGenerator(int p, int q) {
-        if (checkPrime(p)) {
-            this.p = p;
-        } else if (checkPrime(q)) {
-            this.q = q;
-        } else {
-            System.out.println("Beide Zahlen müssen Primzahl sein!");
-        }
+        this.p = p;
+        this.q = q;
+
 
     }
 
@@ -35,28 +31,18 @@ public class KeyGenerator {
 
 
     public int findE(int f) {
-        int e = 2;
+        int e = 4;
         while (ggT(e, f) != 1) {
             e++;
         } return e;
     }
 
-    public int findD(int e, int f) {
+    public int findD(int e, int phi) {
         int d = 2;
-        while ((d*e) % f != 1) {
+        while ((d*e) % phi != 1) {
             d++;
         } return d;
     }
 
-    public boolean checkPrime(int number) {
-        for (int i = 2; i <= number; i++) {
-            if (number % i == 0) {
-                return false;
-            } else {
-                i++;
-            }
-        }
-        return false;
-    }
 }
 
