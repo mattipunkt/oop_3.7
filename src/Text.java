@@ -32,9 +32,10 @@ public class Text {
             File myObj = new File(pfad);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-
+                writeText(text, pfad);
             } else {
                 System.out.println("File already exists.");
+                writeText(text, pfad);
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
