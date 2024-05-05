@@ -23,7 +23,7 @@ public class KeyProcessor {
     public String intToText(int tempNum){
         return String.valueOf(tempNum);
     }
-    public void encode(int[] key,String text) {
+    public void encode(int[] key,String text, String pfad) {
         Text write = new Text();
         int e = key[0];
         int g = key[1];
@@ -32,22 +32,21 @@ public class KeyProcessor {
         for (int i : message) {
             message[i] = ((int) Math.pow((message[i]),e) % (g));
             System.out.println(message[i]);
-            write.writeTextToFile(intToText(message[i]),"text.txt");
+            write.writeTextToFile(intToText(message[i]), pfad);
         }
     }
 
-    public String decode(int[] key, String text) {
+    public void decode(int[] key, String text, String pfad) {
         int g = key[1];
         int d = key[0];
         StringBuilder convert = new StringBuilder();
         Text reader = new Text();
-        String inputText =  reader.readTextFromFile("text.txt");
+        String inputText =  reader.readTextFromFile(pfad);
         for (int i = 0; i < inputText.length(); i++) {
             int temp = Integer.valueOf(inputText.charAt(i));
             temp = ((int) Math.pow(temp,d)) % g;
             convert.append(Character.toString((char) temp));
         }
-        return convert.toString();
-
+        reader.writeTextToFile(convert.toString(), pfad);
     }
 }
