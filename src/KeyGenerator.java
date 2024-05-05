@@ -28,7 +28,7 @@ public class KeyGenerator {
     public int[] generatePublicKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
-        int[] pubKey = new int[]{e, g};
+        int[] pubKey = {e, g};
         System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
         return pubKey;
     }
