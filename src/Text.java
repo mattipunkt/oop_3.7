@@ -27,7 +27,7 @@ public class Text {
     }
 
 
-    public void writeTextToFile(String text, String pfad) throws FileNotFoundException {
+    public void writeTextToFile(String text, String pfad) {
         try {
             File myObj = new File(pfad);
             if (myObj.createNewFile()) {
