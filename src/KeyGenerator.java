@@ -5,20 +5,23 @@ public class KeyGenerator {
     private int g;
 
     public KeyGenerator(int p, int q) {
-        this.p = p;
-        this.q = q;
-
+        if (isPrime(p) && isPrime(q)) {
+            this.p = p;
+            this.q = q;
+            this.g = p * q;
+        } else {
+            throw new RuntimeException("Keine Primzahl gegeben!");
+        }
 
     }
 
-    public void generatePrivateKey() {
-        g = p * q;
+    public int[] generatePrivateKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
         int d = findD(e, phi);
-        System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
+        int[] privateKey = {d, g};
         System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
-
+        return privateKey;
     }
 
     public int ggT(int a, int b) {
@@ -27,6 +30,16 @@ public class KeyGenerator {
         } else {
             return ggT(b, a % b);
         }
+    }
+
+    public boolean isPrime(int n) {
+        if (n <= 1)
+            return false;
+        for (int i = 2; i < n; i++)
+            if (n % i == 0)
+                return false;
+        return true;
+
     }
 
 
@@ -45,4 +58,5 @@ public class KeyGenerator {
     }
 
 }
+
 

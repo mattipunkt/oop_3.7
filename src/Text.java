@@ -12,12 +12,9 @@ public class Text {
     }
 
     private String readTextFromFile() throws FileNotFoundException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(pfad))){
-
+        try {BufferedReader reader = new BufferedReader(new FileReader(pfad));
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("I/O Error: " + e.getMessage());
         }
         return pfad;
     }
