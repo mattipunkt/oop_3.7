@@ -15,12 +15,8 @@ public class KeyProcessor {
     public int[] textToInt(String text){
         int [] tempNum = new int[text.length()];
         for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == ' '){     // Leerzeichen müssen mit beachtet werden (vielleicht for char : String)
-
-            }
-            else {
                 tempNum[i] = Character.getNumericValue(text.charAt(i));
-            }
+
         }
         return tempNum;
     }
@@ -40,10 +36,18 @@ public class KeyProcessor {
         }
     }
 
-    public void decode() {
+    public String decode(int[] key, String text) {
+        int g = key[1];
+        int d = key[0];
+        StringBuilder convert = new StringBuilder();
         Text reader = new Text();
         String inputText =  reader.readTextFromFile("text.txt");
-
+        for (int i = 0; i < inputText.length(); i++) {
+            int temp = Integer.valueOf(inputText.charAt(i));
+            temp = ((int) Math.pow(temp,d)) % g;
+            convert.append(Character.toString((char) temp));
+        }
+        return convert.toString();
 
     }
 }
