@@ -1,6 +1,10 @@
 import java.lang.Math;
 import java.lang.System;
 public class KeyProcessor {
+
+    public KeyProcessor() {
+    }
+
     private String determineLineSeperator() {
         String lineSeperator = "\n";
         String os = System.getProperty("os.name");
