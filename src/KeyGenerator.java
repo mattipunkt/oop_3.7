@@ -9,6 +9,7 @@ public class KeyGenerator {
             this.p = p;
             this.q = q;
             this.g = p * q;
+            // Test
         } else {
             throw new RuntimeException("Keine Primzahl gegeben!");
         }
