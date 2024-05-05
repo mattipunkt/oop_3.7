@@ -10,7 +10,7 @@ public class Text {
 
     }
 
-    public String readTextFromFile(String pfad) throws FileNotFoundException {
+    public String readTextFromFile(String pfad) {
         try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
