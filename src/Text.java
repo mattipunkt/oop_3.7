@@ -5,13 +5,12 @@ import java.io.FileNotFoundException;
 
 public class Text {
 
-    private String pfad;
 
-    public Text(String pfad) {
-        this.pfad = pfad;
+    public Text() {
+
     }
 
-    private String readTextFromFile() throws FileNotFoundException {
+    public String readTextFromFile(String pfad) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -24,6 +23,29 @@ public class Text {
             return sb.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public void writeTextToFile(String text, String pfad) throws FileNotFoundException {
+        try {
+            File myObj = new File(pfad);
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+    private void writeText(String text, String pfad) throws FileNotFoundException {
+        try (PrintWriter pw = new PrintWriter(pfad)) {
+            pw.println(text);
         }
     }
 }
