@@ -24,6 +24,7 @@ public class KeyGenerator {
         System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
         return privateKey;
     }
+
     public int[] generatePublicKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
@@ -32,7 +33,7 @@ public class KeyGenerator {
         return pubKey;
     }
 
-    public int ggT(int a, int b) {
+    private int ggT(int a, int b) {
         if (b == 0) {
             return a;
         } else {
@@ -40,7 +41,7 @@ public class KeyGenerator {
         }
     }
 
-    public boolean isPrime(int n) {
+    private boolean isPrime(int n) {
         if (n <= 1)
             return false;
         for (int i = 2; i < n; i++)
@@ -51,14 +52,14 @@ public class KeyGenerator {
     }
 
 
-    public int findE(int f) {
+    private int findE(int f) {
         int e = 4;
         while (ggT(e, f) != 1) {
             e++;
         } return e;
     }
 
-    public int findD(int e, int phi) {
+    private int findD(int e, int phi) {
         int d = 2;
         while ((d*e) % phi != 1) {
             d++;
