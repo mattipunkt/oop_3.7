@@ -21,7 +21,7 @@ public class KeyGenerator {
         int e = findE(phi);
         int d = findD(e, phi);
         int[] privateKey = {d, g};
-        System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
+        // System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
         return privateKey;
     }
 
@@ -29,7 +29,7 @@ public class KeyGenerator {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
         int[] pubKey = {e, g};
-        System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
+        // System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
         return pubKey;
     }
 
