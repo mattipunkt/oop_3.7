@@ -27,20 +27,22 @@ public class KeyProcessor {
     public String intToText(int tempNum){
         return String.valueOf(tempNum);
     }
-    public void encode(int[] key,String text, String pfad) {
-        Text write = new Text();
+    public void encode(int[] key, String pfad) {
+        Text texter = new Text();
+        String text = texter.readTextFromFile(pfad);
         int e = key[0];
         int g = key[1];
         int[] message = textToInt(text);
+        String outputPath = pfad.replaceAll(".txt", "_rsa.txt");
         System.out.println("konvertierter Text");
         for (int i : message) {
             message[i] = ((int) Math.pow((message[i]),e) % (g));
             System.out.println(message[i]);
-            write.writeTextToFile(intToText(message[i]), pfad);
+            texter.writeTextToFile(intToText(message[i]), outputPath);
         }
     }
 
-    public void decode(int[] key, String text, String pfad) {
+    public void decode(int[] key, String pfad) {
         int g = key[1];
         int d = key[0];
         StringBuilder convert = new StringBuilder();
@@ -51,6 +53,7 @@ public class KeyProcessor {
             temp = ((int) Math.pow(temp,d)) % g;
             convert.append(Character.toString((char) temp));
         }
-        reader.writeTextToFile(convert.toString(), pfad);
+        String outputPath = pfad.replaceAll(".txt", "_rsa.txt");
+        reader.writeTextToFile(convert.toString(), outputPath);
     }
 }

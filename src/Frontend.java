@@ -40,7 +40,7 @@ public class Frontend {
             System.out.println("Die zu öffnende Datei ist: " +
                     chooser.getSelectedFile().getName());
         }
-        k.encode(key, "", path);
+        k.encode(key, path);
     }
 
     private void decode() {
@@ -56,7 +56,7 @@ public class Frontend {
             System.out.println("Die zu öffnende Datei ist: " +
                     chooser.getSelectedFile().getName());
         }
-        k.decode(key, "", path);
+        k.decode(key, path);
     }
 
     private void generateKeys() {
