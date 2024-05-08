@@ -53,7 +53,7 @@ public class KeyProcessor {
             temp = ((int) Math.pow(temp,d)) % g;
             convert.append(Character.toString((char) temp));
         }
-        String outputPath = pfad.replaceAll(".txt", "_rsa.txt");
+        String outputPath = pfad.replaceAll(".txt", "_decode.txt");
         reader.writeTextToFile(convert.toString(), outputPath);
     }
 }

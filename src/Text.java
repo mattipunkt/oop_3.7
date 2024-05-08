@@ -45,8 +45,10 @@ public class Text {
     }
 
     private void writeText(String text, String pfad) throws FileNotFoundException {
-        try (PrintWriter pw = new PrintWriter(pfad)) {
-            pw.println(text);
+        try (FileWriter fw = new FileWriter(pfad, true)) {
+            fw.write(text);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
