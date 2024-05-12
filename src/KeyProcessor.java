@@ -1,10 +1,26 @@
 import java.lang.Math;
 import java.lang.System;
+
+/**
+ * Diese Klasse nutzt die von @see Keygenerator generierten Schlüssel, um Nachrichten nach dem RSA Verfahren zu de-/encoden
+ *
+ * @author Florian Haßelbacher
+ * @version 1.0
+ * @since JDK 1.21
+ */
 public class KeyProcessor {
 
+    /**
+     * Konstruktor der Klasse. Wichtig um auf die decode/encode Methoden von außerhalb zuzugreifen
+     */
     public KeyProcessor() {
     }
 
+    /**
+     * Diese Methode ermittelt das Zeilentrennzeichen, da sich dieses zwischen Linux und windows unterscheidet
+     *
+     * @return : Zeilentrennzeichen als String
+     */
     private String determineLineSeperator() {
         String lineSeperator = "\n";
         String os = System.getProperty("os.name");
@@ -16,7 +32,13 @@ public class KeyProcessor {
         return lineSeperator;
     }
 
-    public int[] textToInt(String text){
+    /**
+     * Diese Methode konvertiert einen String zu einem int Array, welches von der encode Methode verarbeitet wird
+     *
+     * @param text Der zu konvertierende text
+     * @return konvertierter Text als int Array
+     */
+    private int[] textToInt(String text){
         int [] tempNum = new int[text.length()];
         for (int i = 0; i < text.length(); i++) {
                 tempNum[i] = Character.getNumericValue(text.charAt(i));
@@ -24,9 +46,22 @@ public class KeyProcessor {
         }
         return tempNum;
     }
-    public String intToText(int tempNum){
+
+    /**
+     * Diese Methode konvertiert einen integer Wert zu einem String, welcher von der encode Methode genutzt wird
+     * @param tempNum der zu konvertierende integer
+     * @return kovertierten integer als String
+     */
+    private String intToText(int tempNum){
         return String.valueOf(tempNum);
     }
+
+    /**
+     * Diese Methode kovertiert einen Text mithilfe des privaten Schlüssels zu einer Reihen an Zahlen
+     *
+     * @param key der Schlüssel zur encodierung
+     * @param pfad der Dateipfad, wo die Textdatei liegt
+     */
     public void encode(int[] key, String pfad) {
         Text texter = new Text();
         String text = texter.readTextFromFile(pfad);
@@ -42,6 +77,12 @@ public class KeyProcessor {
         }
     }
 
+    /**
+     * Diese Methode nutzt den öffentlichen Schlüssel, um eine Menge an Zahlen zurück zu Text zu konvertieren
+     *
+     * @param key der Schlüssel zur decodierung
+     * @param pfad der Pfad, an dem die Textdatei liegt
+     */
     public void decode(int[] key, String pfad) {
         int g = key[1];
         int d = key[0];
