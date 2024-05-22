@@ -70,11 +70,14 @@ public class KeyProcessor {
         int[] message = textToInt(text);
         String outputPath = pfad.replaceAll(".txt", "_rsa.txt");
         System.out.println("konvertierter Text");
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < message.length; i++ ) {
             message[i] = ((int) Math.pow((message[i]),e) % (g));
             System.out.println(message[i]);
-            texter.writeTextToFile(intToText(message[i]), outputPath);
+            sb.append(message[i]);
         }
+        texter.writeTextToFile(sb.toString(), outputPath);
     }
 
     /**
