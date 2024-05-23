@@ -17,6 +17,21 @@ public class KeyProcessor {
     }
 
     /**
+     * Extra klasse, die modulo und pow operationen vereinigt, um die Zahlen bei der Umwandlung kleiner zu halten
+     * @param base Basis für die Exponentialrechnung
+     * @param exp Exponent der Exponentialrechnung
+     * @param mod Zahl, mit der die Modulo rechnung durchgeführt wird
+     * @return Ergebnis der Rechnung
+     */
+    public static int modPow(int base, int exp, int mod) {
+        int result = 1;
+        for (int i = 0; i < exp; i++) {
+            result = (result * base) % mod;
+        }
+        return result;
+    }
+
+    /**
      * Diese Methode ermittelt das Zeilentrennzeichen, da sich dieses zwischen Linux und windows unterscheidet
      *
      * @return : Zeilentrennzeichen als String
@@ -41,7 +56,7 @@ public class KeyProcessor {
     private int[] textToInt(String text){
         int [] tempNum = new int[text.length()];
         for (int i = 0; i < text.length(); i++) {
-                tempNum[i] = Character.getNumericValue(text.charAt(i));
+                tempNum[i] = (int) (text.charAt(i));
 
         }
         return tempNum;
@@ -52,8 +67,8 @@ public class KeyProcessor {
      * @param tempNum der zu konvertierende integer
      * @return kovertierten integer als String
      */
-    private String intToText(int tempNum){
-        return String.valueOf(tempNum);
+    private char intToText(int tempNum){
+        return (char) tempNum;
     }
 
     /**
@@ -73,9 +88,10 @@ public class KeyProcessor {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < message.length; i++ ) {
-            message[i] = ((int) Math.pow((message[i]),e) % (g));
-            System.out.println(message[i]);
-            sb.append(message[i]);
+            message[i] = ((int) modPow((message[i]),e, g));
+
+            sb.append(Integer.valueOf(message[i]));
+            sb.append("\n");
         }
         texter.writeTextToFile(sb.toString(), outputPath);
     }
@@ -92,6 +108,13 @@ public class KeyProcessor {
         StringBuilder convert = new StringBuilder();
         Text reader = new Text();
         String inputText =  reader.readTextFromFile(pfad);
+        int c = 0;
+        while (c < inputText.length()) {
+            while (inputText.charAt(c) != '\n') {
+                ++c;
+            }
+        }
+
         for (int i = 0; i < inputText.length(); i++) {
             int temp = Integer.valueOf(inputText.charAt(i));
             temp = ((int) Math.pow(temp,d)) % g;

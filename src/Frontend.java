@@ -40,7 +40,8 @@ public class Frontend {
         System.out.println("Bitte den öffentlichen Schlüssel eingeben: ");
         int e = UserInterface.in.requestInt("Erste Zahl: ");
         int g = UserInterface.in.requestInt("Zweite Zahl: ");
-        int[] key = {e, g};
+        KeyGenerator x = new KeyGenerator(e,g);
+        int[] key = x.generatePublicKey();
         KeyProcessor k = new KeyProcessor();
         int returnValue = chooser.showOpenDialog(null);
         if(returnValue == JFileChooser.APPROVE_OPTION)
@@ -58,7 +59,8 @@ public class Frontend {
         System.out.println("Bitte den privaten Schlüssel eingeben: ");
         int d = UserInterface.in.requestInt("Zahl 1: ");
         int g = UserInterface.in.requestInt("Zahl 2: ");
-        int[] key = {d, g};
+        KeyGenerator x = new KeyGenerator(d,g);
+        int[] key = x.generatePrivateKey();
         KeyProcessor k = new KeyProcessor();
         int returnValue = chooser.showOpenDialog(null);
         if(returnValue == JFileChooser.APPROVE_OPTION)
