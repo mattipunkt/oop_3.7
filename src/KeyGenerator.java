@@ -51,7 +51,11 @@ public class KeyGenerator {
 
     }
 
-
+    /**
+     * Diese Methode setzt die Formel zur Ermittlung von e um
+     * @param f Wert für phi aus generatePublicKey() oder generatePrivateKey()
+     * @return errechneter Wert für e
+     */
     private int findE(int f) {
         int e = 4;
         while (ggT(e, f) != 1) {
@@ -59,6 +63,12 @@ public class KeyGenerator {
         } return e;
     }
 
+    /**
+     * Diese Methode setzt die Formel zur Ermittlung von d um
+     * @param e Wert für e aus generatePrivateKey()
+     * @param phi Wert für phi aus generatePrivateKey()
+     * @return errechneter Wert für d
+     */
     private int findD(int e, int phi) {
         int d = 2;
         while ((d*e) % phi != 1) {

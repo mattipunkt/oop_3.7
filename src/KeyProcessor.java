@@ -107,18 +107,13 @@ public class KeyProcessor {
         int g = key[1];
         int d = key[0];
         String lineSeperator = determineLineSeperator();
-        StringBuilder convert = new StringBuilder();
-        StringBuilder temporary = new StringBuilder();
         Text reader = new Text();
         String inputText =  reader.readTextFromFile(pfad);
-        int c = 0;
         String str = Stream.of(inputText.split(lineSeperator))
                 .map(ch -> (char) (modPow(Integer.valueOf(ch).intValue(), d, g)))
                 .collect(StringBuilder::new,
                         StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-        //System.out.println(str);
-
 
         String outputPath = pfad.replaceAll(".txt", "_decode.txt");
         reader.writeTextToFile(str, outputPath);
