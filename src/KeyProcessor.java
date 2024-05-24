@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.lang.System;
+import java.util.stream.Stream;
 
 /**
  * Diese Klasse nutzt die von @see Keygenerator generierten Schlüssel, um Nachrichten nach dem RSA Verfahren zu de-/encoden
@@ -105,22 +106,21 @@ public class KeyProcessor {
     public void decode(int[] key, String pfad) {
         int g = key[1];
         int d = key[0];
+        String lineSeperator = determineLineSeperator();
         StringBuilder convert = new StringBuilder();
+        StringBuilder temporary = new StringBuilder();
         Text reader = new Text();
         String inputText =  reader.readTextFromFile(pfad);
         int c = 0;
-        while (c < inputText.length()) {
-            while (inputText.charAt(c) != '\n') {
-                ++c;
-            }
-        }
+        String str = Stream.of(inputText.split(lineSeperator))
+                .map(ch -> (char) (modPow(Integer.valueOf(ch).intValue(), d, g)))
+                .collect(StringBuilder::new,
+                        StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        //System.out.println(str);
 
-        for (int i = 0; i < inputText.length(); i++) {
-            int temp = Integer.valueOf(inputText.charAt(i));
-            temp = ((int) Math.pow(temp,d)) % g;
-            convert.append(Character.toString((char) temp));
-        }
+
         String outputPath = pfad.replaceAll(".txt", "_decode.txt");
-        reader.writeTextToFile(convert.toString(), outputPath);
+        reader.writeTextToFile(str, outputPath);
     }
 }
