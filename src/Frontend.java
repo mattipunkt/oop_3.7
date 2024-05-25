@@ -73,6 +73,7 @@ public class Frontend {
     }
 
     private void generateKeys() {
+        System.out.println("Die Zahl muss eine Primzahl sein, und größer gleich 11 sein. ");
         int p = UserInterface.in.requestInt("Bitte Primzahl 1 eingeben: ");
         int q = UserInterface.in.requestInt("Bitte Primzahl 2 eingeben: ");
         KeyGenerator k = new KeyGenerator(p, q);

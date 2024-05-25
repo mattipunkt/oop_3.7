@@ -6,9 +6,17 @@ public class KeyGenerator {
 
     public KeyGenerator(int p, int q) {
         if (isPrime(p) && isPrime(q)) {
-            this.p = p;
-            this.q = q;
-            this.g = p * q;
+            if (p >= 11 && q >= 13) {
+                this.p = p;
+                this.q = q;
+                this.g = p * q;
+            } else if (p >= 13 && q >= 11) {
+                this.p = p;
+                this.q = q;
+                this.g = p * q;
+            } else {
+                throw new RuntimeException("p und q müssen größer gleich 11 sein.");
+            }
             // Test
         } else {
             throw new RuntimeException("Keine Primzahl gegeben!");
