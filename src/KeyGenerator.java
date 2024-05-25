@@ -28,17 +28,15 @@ public class KeyGenerator {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
         int d = findD(e, phi);
-        int[] privateKey = {d, g};
         // System.out.println("Der Private Schlüssel ist: {" + d + ", " + g +"}");
-        return privateKey;
+        return new int[]{d, g};
     }
 
     public int[] generatePublicKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
-        int[] pubKey = {e, g};
         // System.out.println("Der Öffentliche Schlüssel ist: {" + e + ", " + g +"}");
-        return pubKey;
+        return new int[]{e, g};
     }
 
     private int ggT(int a, int b) {
