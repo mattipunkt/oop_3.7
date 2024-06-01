@@ -1,9 +1,18 @@
+/**
+ * Diese Klasse erstellt erstellt anhand von der eingebenen (Prim-)zahlen die Keys für
+ * die RSA-Verschlüsselung.
+ */
 public class KeyGenerator {
 
     private int p;
     private int q;
     private int g;
 
+    /**
+     * Der Konstruktor erstellt die Initalisierung der Keys
+     * @param p Eine Primzahl p
+     * @param q Eine Primzahl q
+     */
     public KeyGenerator(int p, int q) {
         if (isPrime(p) && isPrime(q)) {
             if (p >= 11 && q >= 13) {
@@ -21,9 +30,12 @@ public class KeyGenerator {
         } else {
             throw new RuntimeException("Keine Primzahl gegeben!");
         }
-
     }
 
+    /**
+     * Diese Methode erstellt die Private-Keys für die Verschlüsselung
+     * @return Ein Array aus den beiden Key-Zahlen
+     */
     public int[] generatePrivateKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
@@ -32,6 +44,10 @@ public class KeyGenerator {
         return new int[]{d, g};
     }
 
+    /**
+     * Diese Methode erstellt die Public-Keys für die Verschlüsselung
+     * @return Ein Array aus den beiden Key-Zahlen
+     */
     public int[] generatePublicKey() {
         int phi = (p-1)*(q-1);
         int e = findE(phi);
@@ -39,6 +55,12 @@ public class KeyGenerator {
         return new int[]{e, g};
     }
 
+    /**
+     * Diese Methode berechnet den größten gemeinsamen Teiler. Dieser wird zur Berechnung der Keys benötigt.
+     * @param a Erste Zahl
+     * @param b Zweite Zahl
+     * @return größter gemeinsamer Teiler
+     */
     private int ggT(int a, int b) {
         if (b == 0) {
             return a;
@@ -47,6 +69,11 @@ public class KeyGenerator {
         }
     }
 
+    /**
+     * Diese Methode überprüft, ob die eingebene Zahl eine Primzahl ist
+     * @param n eine Zahl, die auf Prim-Eigenschaft überprüft wird
+     * @return Primzahl / nicht-Primzahl
+     */
     private boolean isPrime(int n) {
         if (n <= 1)
             return false;

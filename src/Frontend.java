@@ -2,13 +2,26 @@ import de.oop2024.util.UserInterface;
 import javax.swing.JFileChooser;
 import java.util.Arrays;
 
+/**
+ * Diese Klasse ist der User-Interface-Layer zu den ausführenden Klassen und gibt ein Hauptmenü aus
+ * und erfragt alle nötigen Nutzereingaben.
+ */
 public class Frontend {
+    /**
+     * Der Dateiauswähl-Dialog ist Klassenweit verfügbar.
+     */
     JFileChooser chooser;
 
+    /**
+     * Der Konstruktor initialisiert das Frontend
+     */
     public Frontend() {
         this.chooser = new JFileChooser();
     }
 
+    /**
+     * Diese Methode stellt das Hauptmenü dar. Von hier aus werden alle Operationen weitergeleitet.
+     */
     public void menu() {
         boolean run = true;
         while (run) {
@@ -33,7 +46,10 @@ public class Frontend {
         }
     }
 
-
+    /**
+     * Diese Methode ist das Frontend für das Verschlüsseln eines Textes. Sie erfragt alle nötigen
+     * Eingaben und gibt sie an die <code>KeyProcessor</code>-Klasse weiter
+     */
     private void encode() {
         System.out.println("*=* TEXT VERSCHLÜSSELN *=*");
         String path = "";
@@ -53,6 +69,10 @@ public class Frontend {
         k.encode(key, path);
     }
 
+    /**
+     * Diese Methode ist das Frontend für das Entschlüsseln eines Textes. Sie erfragt alle nötigen Eingaben
+     * und gibt sie an die <code>KeyProcessor</code>-Klasse weiter.
+     */
     private void decode() {
         System.out.println("*=* TEXT ENTSCHLÜSSELN *=*");
         String path = "";
@@ -72,6 +92,10 @@ public class Frontend {
         k.decode(key, path);
     }
 
+    /**
+     * Diese Methode ist das Frontend für das Entschlüsseln eines Textes. Sie erfragt alle nötigen Eingaben
+     * und gibt diese an die <code>KeyGenerator</code>-Klasse weiter,
+     */
     private void generateKeys() {
         System.out.println("Die Zahl muss eine Primzahl sein, und größer gleich 11 sein. ");
         int p = UserInterface.in.requestInt("Bitte Primzahl 1 eingeben: ");
