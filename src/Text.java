@@ -21,7 +21,7 @@ public class Text {
      * @param pfad Pfad zur Datei
      * @return Text aus der Datei als String
      */
-    public String readTextFromFile(String pfad) {
+    public static String readTextFromFile(String pfad) {
         try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -43,7 +43,7 @@ public class Text {
      * @param text In die Datei zu schreibender Text
      * @param pfad Pfad, an dem die Datei liegt.
      */
-    public void writeTextToFile(String text, String pfad) {
+    public static void writeTextToFile(String text, String pfad) {
         try {
             File myObj = new File(pfad);
             if (myObj.createNewFile()) {
@@ -66,7 +66,7 @@ public class Text {
      * @param pfad Pfad, an dem die Datei liegt
      * @throws FileNotFoundException Datei nicht gefunden
      */
-    private void writeText(String text, String pfad) throws FileNotFoundException {
+    private static void writeText(String text, String pfad) throws FileNotFoundException {
         try (FileWriter fw = new FileWriter(pfad, true)) {
             fw.write(text);
         } catch (IOException e) {

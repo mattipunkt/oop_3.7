@@ -61,7 +61,7 @@ public class KeyGenerator {
      * @param b Zweite Zahl
      * @return größter gemeinsamer Teiler
      */
-    private int ggT(int a, int b) {
+    private static int ggT(int a, int b) {
         if (b == 0) {
             return a;
         } else {
@@ -74,7 +74,7 @@ public class KeyGenerator {
      * @param n eine Zahl, die auf Prim-Eigenschaft überprüft wird
      * @return Primzahl / nicht-Primzahl
      */
-    private boolean isPrime(int n) {
+    private static boolean isPrime(int n) {
         if (n <= 1)
             return false;
         for (int i = 2; i < n; i++)
@@ -89,7 +89,7 @@ public class KeyGenerator {
      * @param f Wert für phi aus generatePublicKey() oder generatePrivateKey()
      * @return errechneter Wert für e
      */
-    private int findE(int f) {
+    private static int findE(int f) {
         int e = 4;
         while (ggT(e, f) != 1) {
             e++;
@@ -102,7 +102,7 @@ public class KeyGenerator {
      * @param phi Wert für phi aus generatePrivateKey()
      * @return errechneter Wert für d
      */
-    private int findD(int e, int phi) {
+    private static int findD(int e, int phi) {
         int d = 2;
         while ((d*e) % phi != 1) {
             d++;
